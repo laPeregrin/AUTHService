@@ -16,7 +16,7 @@ namespace testRep
         public void Setup()
         {
             _context = new EfDbContext();
-            hservice = new HashTagService(_context);
+            hservice = new HashTagService();
             _service = new BllLayer(_context, hservice);
            
         }

@@ -28,7 +28,7 @@ namespace DataBaseStaff.Service
             foreach (var item in hashtagsArray)
             {
                 EfDbContext _service = new EfDbContext();
-                taskList.Enqueue(Task.Run(async()=>
+                taskList.Enqueue(Task.Run(async () =>
                 {
                     var hashtag = await _service.HashaTags.FirstOrDefaultAsync(x => x.HashTagContent == item);
                     if (hashtag == null)
@@ -54,6 +54,7 @@ namespace DataBaseStaff.Service
                         await _service.SaveChangesAsync();
                     }
                 }));
+                await _service.DisposeAsync();
             }
             if (taskList.Any())
             {
