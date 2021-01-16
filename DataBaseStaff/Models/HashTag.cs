@@ -7,6 +7,6 @@ namespace DataBaseStaff.Models
     {
         public Guid Id { get; set; }
         public string HashTagContent { get; set; }
-        public IEnumerable<Publication> Publications { get; set; }
+        public ICollection<Publication> Publications { get; set; }
     }
 }

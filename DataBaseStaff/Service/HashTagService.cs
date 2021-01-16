@@ -12,76 +12,122 @@ namespace DataBaseStaff.Service
 {
     public class HashTagService
     {
-        //private EfDbContext _service;
+        private EfDbContext service;
 
-        public HashTagService()
+        public HashTagService(EfDbContext _service)
         {
-            //_service = service;
+            service = _service;
         }
 
         public async Task SyncHashTags(string text, Publication publication)
         {
-            var taskList = new ConcurrentQueue<Task>();
-            var hashtagsArray = GetAllHashtags(text);
+            var hasgtagsArray = GetAllHashtags(text);
 
-            var hashTags = new List<HashTag>();
-            foreach (var item in hashtagsArray)
+            foreach (var ItemContent in hasgtagsArray)
             {
-                EfDbContext _service = new EfDbContext();
-                taskList.Enqueue(Task.Run(async () =>
+                HashTag hashtag = await service.HashaTags.Include(x=>x.Publications).FirstOrDefaultAsync(x => x.HashTagContent == ItemContent);
+                if (hashtag == null)
                 {
-                    var hashtag = await _service.HashaTags.FirstOrDefaultAsync(x => x.HashTagContent == item);
-                    if (hashtag == null)
+                    var PublicationCollection = new List<Publication>();
+                    PublicationCollection.Add(publication);
+                    hashtag = new HashTag
                     {
-                        var publications = new List<Publication>();
-                        publications.Add(publication);
-                        hashtag = new HashTag()
-                        {
-                            Id = Guid.NewGuid(),
-                            HashTagContent = item,
-                            Publications = publications
-                        };
-                        await _service.HashaTags.AddAsync(hashtag);
-                        await _service.SaveChangesAsync();
-                    }
-                    else
-                    {
-                        var newPublications = hashtag.Publications.ToList();
-                        newPublications.Add(publication);
-                        hashtag.Publications = newPublications;
+                        Id = Guid.NewGuid(),
+                        HashTagContent = ItemContent,
+                        Publications = PublicationCollection
+                    };
+                    await service.AddAsync(hashtag);
+                    await service.SaveChangesAsync();
+                }
+                else
+                {
+                    hashtag.Publications.Add(publication);
 
-                        _service.HashaTags.Update(hashtag);
-                        await _service.SaveChangesAsync();
-                    }
-                }));
-                await _service.DisposeAsync();
-            }
-            if (taskList.Any())
-            {
-                await Task.WhenAll(taskList);
-                taskList.Clear();
+                    var contaient = hashtag.Publications;
+
+                    service.Update(hashtag);
+                    await service.SaveChangesAsync();
+                }
+
             }
         }
 
 
 
 
-        private string[] GetAllHashtags(string text)
-        {
-            Regex regex = new Regex(@"\#\w+");
-
-            var collection = regex.Matches(text).AsEnumerable().ToArray();
-
-            int i = 0;
-
-            string[] container = new string[collection.Count()];
-            foreach (var item in collection)
+            private string[] GetAllHashtags(string text)
             {
+                Regex regex = new Regex(@"\#\w+");
 
-                container[i] = item.ToString().ToLower();
-                i++;
+                var collection = regex.Matches(text).AsEnumerable().ToArray();
+
+                int i = 0;
+
+                string[] container = new string[collection.Count()];
+                foreach (var item in collection)
+                {
+
+                    container[i] = item.ToString().ToLower();
+                    i++;
+                }
+                return container;
             }
-            return container;
         }
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public async Task SyncHashTags(string text, Publication publication)
+//{
+//    var taskList = new ConcurrentQueue<Task>();
+//    var hashtagsArray = GetAllHashtags(text);
+
+//    var hashTags = new List<HashTag>();
+//    foreach (var item in hashtagsArray)
+//    {
+//        EfDbContext _service = new EfDbContext();
+//        taskList.Enqueue(Task.Run(async () =>
+//        {
+//            var hashtag = await _service.HashaTags.FirstOrDefaultAsync(x => x.HashTagContent == item);
+//            if (hashtag == null)
+//            {
+//                var publications = new List<Publication>();
+//                publications.Add(publication);
+//                hashtag = new HashTag()
+//                {
+//                    Id = Guid.NewGuid(),
+//                    HashTagContent = item,
+//                    Publications = publications
+//                };
+//                await _service.HashaTags.AddAsync(hashtag);
+//                await _service.SaveChangesAsync();
+//            }
+//            else
+//            {
+//                var newPublications = hashtag.Publications.ToList();
+//                newPublications.Add(publication);
+//                hashtag.Publications = newPublications;
+
+//                _service.HashaTags.Update(hashtag);
+//                await _service.SaveChangesAsync();
+//            }
+//        }));
+//        await _service.DisposeAsync();
+//    }
+//    if (taskList.Any())
+//    {
+//        Task.WaitAll();
+//        taskList.Clear();
+//    }
+//}

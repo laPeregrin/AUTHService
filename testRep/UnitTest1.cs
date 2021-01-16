@@ -16,15 +16,15 @@ namespace testRep
         public void Setup()
         {
             _context = new EfDbContext();
-            hservice = new HashTagService();
+            hservice = new HashTagService(_context);
             _service = new BllLayer(_context, hservice);
            
         }
 
         [Test]
-        public async Task Test1()
+        public async Task AddPublication_DebugTest()
         {
-            var user = await _service.GetUserByExpression(x => x.UserName == "reader");
+            var user = await _service.GetUserByExpression(x => x.UserName == "text");
             var publciation = new Publication()
             {
                 Id = Guid.NewGuid(),
@@ -51,5 +51,6 @@ namespace testRep
            await _service.RemovePostById(new Guid("89b507c8-aa3a-4169-a53e-6158537ae9ba"));
             return;
         }
+
     }
 }
