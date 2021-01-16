@@ -24,7 +24,7 @@ namespace BlogAPI.Controllers
             _service = service;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<string> Index()
         {
             string id = HttpContext.User.FindFirstValue("Id");
@@ -36,11 +36,11 @@ namespace BlogAPI.Controllers
         }
 
         [Route("AddPost"), HttpPost, Authorize(Roles = "Poster, Admin")]
-        public async Task<UserResponce> AddPost([FromBody] UserRequest userRequest)
+        public async Task<UserResponse> AddPost([FromBody] UserRequest userRequest)
         {
             if (string.IsNullOrWhiteSpace(userRequest.MessageRequest))
             {
-                return new UserResponce("Empty message");
+                return new UserResponse("Empty message");
             }
 
             string id = HttpContext.User.FindFirstValue("Id");
@@ -48,44 +48,45 @@ namespace BlogAPI.Controllers
 
             if (user == null)
             {
-                return new UserResponce($"Id: {id} - not found");
+                return new UserResponse($"Id: {id} - not found");
             }
 
             var post = new Publication(userRequest.MessageRequest, user);
 
             await _service.AddPublication(post);
 
-            return new UserResponce("Success");
+            return new UserResponse("Success");
         }
 
 
         [Route("GetPosts"), HttpGet, Authorize]
-        public async Task<IEnumerable<Publication>> GetPosts()
+        public async Task<IEnumerable<ItemResponce>> GetPosts()
         {
-            return await _service.GetAllPublication();
+            var result = await _service.GetAllPublication();
+            return new UserResponseWithPosts(result).Publications;
         }
 
 
 
         [Route("GetPostsByHashTag"), HttpGet, Authorize]
-        public async Task<IActionResult> GetPostsByHashTag([FromBody] UserRequest userRequest)
+        public async Task<IActionResult> GetPostsByHashTag([FromBody]UserRequest userRequest)
         {
             if (string.IsNullOrWhiteSpace(userRequest.MessageRequest))
             {
-                return NotFound();
+                return NotFound(new UserResponse("cant search by 'empty';( "));
             }
             try
             {
                 var coll = await _service.GetByHashTag(userRequest.MessageRequest);
-                return Ok(new UserResponceWithPosts(coll));
+                return Ok(new UserResponseWithPosts(coll));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound(new UserResponce("cant find by this hashtag"));
+                return NotFound(new UserResponse("cant find by this hashtag"));
             }
         }
 
-        [Route("RemovePost"), HttpDelete, Authorize(Roles = "Admin")]
+        [Route("RemovePost"), HttpPost, Authorize(Roles = "Admin")]
         public async Task<string> RemovePost([FromBody] UserRequest userRequest)
         {
 

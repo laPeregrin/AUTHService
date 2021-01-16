@@ -1,12 +1,12 @@
-W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.csprojAssemblyReference.cache
-W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.AssemblyInfoInputs.cache
-W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.AssemblyInfo.cs
-W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.csproj.CoreCompileInputs.cache
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\bin\Debug\netcoreapp3.1\DataBaseStaff.deps.json
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\bin\Debug\netcoreapp3.1\DataBaseStaff.runtimeconfig.json
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\bin\Debug\netcoreapp3.1\DataBaseStaff.runtimeconfig.dev.json
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\bin\Debug\netcoreapp3.1\DataBaseStaff.dll
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\bin\Debug\netcoreapp3.1\DataBaseStaff.pdb
+W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.csprojAssemblyReference.cache
+W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.AssemblyInfoInputs.cache
+W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.AssemblyInfo.cs
+W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.csproj.CoreCompileInputs.cache
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.dll
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.pdb
 W:\programs\repos\AUTHENTICATIONService\DataBaseStaff\obj\Debug\netcoreapp3.1\DataBaseStaff.genruntimeconfig.cache

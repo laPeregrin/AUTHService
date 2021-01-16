@@ -13,11 +13,11 @@ namespace BlogAPI.Models.Wraps
         public string messageId { get; set; }
     }
 
-    public class UserResponceWithPosts
+    public class UserResponseWithPosts
     {
         public List<ItemResponce> Publications { get; set; }
 
-        public UserResponceWithPosts(IEnumerable<Publication> publications)
+        public UserResponseWithPosts(IEnumerable<Publication> publications)
         {
             Publications = new List<ItemResponce>();
 

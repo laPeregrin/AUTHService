@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlogAPI.Models.Wraps
 {
-    public class UserResponce
+    public class UserResponse
     {
         public string Message { get; set; }
 
-        public UserResponce(string message)
+        public UserResponse(string message)
         {
             Message = message;
         }

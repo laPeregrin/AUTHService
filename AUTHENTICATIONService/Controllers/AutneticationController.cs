@@ -80,6 +80,8 @@ namespace AUTHENTICATIONService.Controllers
             return Ok(user.Id);
         }
 
+
+
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody] RefreshRequest refreshRequest)
         {
@@ -151,6 +153,37 @@ namespace AUTHENTICATIONService.Controllers
 
             return Ok(responce);
         }
+
+
+        [HttpPost("registrationByAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdminRequest registerRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequestModelState();
+            }
+            if (registerRequest.Password != registerRequest.ConfirmPassword)
+            {
+                return BadRequest(new ErrorResponse("Password does not match confirm password."));
+            }
+            var CheckuserName = await _dataService.GetUserByExpression(x => x.UserName == registerRequest.UserName);
+            if (CheckuserName != null)
+            {
+                return BadRequest(new ErrorResponse("username has used already"));
+            }
+            var CheckuserEmail = await _dataService.GetUserByExpression(x => x.Email == registerRequest.Email);
+            if (CheckuserEmail != null)
+            {
+                return BadRequest(new ErrorResponse("Email has used already"));
+            }
+            var hashPassword = _passwordHasher.HashPassword(registerRequest.Password);
+            var user = registerRequest.ConvertToUser(hashPassword);
+            await _dataService.AddUser(user);
+
+            return Ok(user.Id);
+        }
+
+
 
         #region Underface
         private IActionResult BadRequestModelState()

@@ -49,6 +49,10 @@ W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcorea
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\Config.dll
+W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\DataBaseStaff.dll
+W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\Config.pdb
+W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\DataBaseStaff.pdb
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.csprojAssemblyReference.cache
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.AssemblyInfoInputs.cache
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.AssemblyInfo.cs
@@ -62,7 +66,3 @@ W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcorea
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.dll
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.pdb
 W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\obj\Debug\netcoreapp3.1\AUTHENTICATIONService.genruntimeconfig.cache
-W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\Config.dll
-W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\Config.pdb
-W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\DataBaseStaff.dll
-W:\programs\repos\AUTHENTICATIONService\AUTHENTICATIONService\bin\Debug\netcoreapp3.1\DataBaseStaff.pdb

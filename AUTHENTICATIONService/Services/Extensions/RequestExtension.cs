@@ -24,5 +24,19 @@ namespace AUTHENTICATIONService.Services.Extensions
             };
             return user;
         }
+
+        public static User ConvertToUser(this RegisterAdminRequest request, string HashPassword)
+        {
+            UserRole role = UserRole.Admin;
+            var user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email,
+                Role = role,
+                UserName = request.UserName,
+                PasswordHash = HashPassword
+            };
+            return user;
+        }
     }
 }
