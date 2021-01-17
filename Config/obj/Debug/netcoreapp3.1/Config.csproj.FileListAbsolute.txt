@@ -1,9 +1,0 @@
-W:\programs\repos\AUTHENTICATIONService\Config\bin\Debug\netcoreapp3.1\Config.deps.json
-W:\programs\repos\AUTHENTICATIONService\Config\bin\Debug\netcoreapp3.1\Config.dll
-W:\programs\repos\AUTHENTICATIONService\Config\bin\Debug\netcoreapp3.1\Config.pdb
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.csprojAssemblyReference.cache
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.AssemblyInfoInputs.cache
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.AssemblyInfo.cs
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.csproj.CoreCompileInputs.cache
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.dll
-W:\programs\repos\AUTHENTICATIONService\Config\obj\Debug\netcoreapp3.1\Config.pdb
