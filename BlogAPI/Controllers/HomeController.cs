@@ -68,21 +68,21 @@ namespace BlogAPI.Controllers
 
 
 
-        [Route("GetPostsByHashTag"), HttpGet, Authorize]
-        public async Task<IActionResult> GetPostsByHashTag([FromBody]UserRequest userRequest)
+        [Route("GetPostsByHashTag"), HttpPost, Authorize]
+        public async Task<IEnumerable<ItemResponce>> GetPostsByHashTag([FromBody]UserRequest userRequest)
         {
             if (string.IsNullOrWhiteSpace(userRequest.MessageRequest))
             {
-                return NotFound(new UserResponse("cant search by 'empty';( "));
+                return new UserResponseWithPosts(new List<Publication>()).Publications;
             }
             try
             {
                 var coll = await _service.GetByHashTag(userRequest.MessageRequest);
-                return Ok(new UserResponseWithPosts(coll));
+                return new UserResponseWithPosts(coll).Publications;
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound(new UserResponse("cant find by this hashtag"));
+                return new UserResponseWithPosts(new List<Publication>()).Publications;
             }
         }
 

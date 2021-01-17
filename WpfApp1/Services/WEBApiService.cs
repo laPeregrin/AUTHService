@@ -16,21 +16,14 @@ namespace WpfApp1.Services
     {
         private string curToken { get; set; }
         private string curRefreshToken { get; set; }
-
+        private string currId { get; set; }
 
         private HttpClient httpClient { get; set; }
 
 
         public async Task AddPost(string text)
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:44390");
-            if (curToken == null)
-            {
-                MessageBox.Show("Залогиньтесь");
-                return;
-            }
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer  {curToken}");
+            httpClient = InitialApiClient.Build(curToken);
             var body = new UserRequest
             {
                 MessageRequest = text
@@ -46,16 +39,7 @@ namespace WpfApp1.Services
 
         public async Task RemovePostById(string id)
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:44390");
-
-            if (curToken == null)
-            {
-                MessageBox.Show("Залогиньтесь");
-                return;
-            }
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer  {curToken}");
-
+            httpClient = InitialApiClient.Build(curToken);
             var body = new UserRequest
             {
                 MessageRequest = id
@@ -71,12 +55,7 @@ namespace WpfApp1.Services
 
         public async Task<IEnumerable<Post>> GetPost(string content)
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:44390");
-
-            if (curToken == null)
-                MessageBox.Show("Залогиньтесь");
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer  {curToken}");
+            httpClient = InitialApiClient.Build(curToken);
 
             if (content == null)
             {
@@ -87,15 +66,15 @@ namespace WpfApp1.Services
             }
             else
             {
-                using var httpResponse = await httpClient.GetAsync("/api/Home/GetPostsByHashTag");
+                
                 var body = new UserRequest { MessageRequest = content };
                 var bodyJson = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
 
-                using var httpResponses = await httpClient.GetAsync("/api/Home/GetPosts");
+                using var httpResponse = await httpClient.PostAsync("/api/Home/GetPostsByHashTag", bodyJson);
 
-                httpClient.Dispose();
+                var posts = await httpResponse.Content.ReadAsAsync<IEnumerable<Post>>();
 
-                return await httpResponses.Content.ReadAsAsync<IEnumerable<Post>>();
+                return posts;
             }
            
         }
@@ -103,8 +82,7 @@ namespace WpfApp1.Services
 
         public async Task login(string login, string password)
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:5001");
+            httpClient = InitialApiClient.Build();
             var body = new LoginRequestBody
             {
                 Password = password,
@@ -112,11 +90,12 @@ namespace WpfApp1.Services
             };
             var bodyJson = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
 
-            using var httpResponse = await httpClient.PostAsync("/API/login", bodyJson);
-
-            var content = await httpResponse.Content.ReadAsAsync<UserLoginResponce>();
-            curToken = content.AccesToken;
-            curRefreshToken = content.RefreshToken;
+            using (var httpResponse = await httpClient.PostAsync("/API/login", bodyJson))
+            {
+                var content = await httpResponse.Content.ReadAsAsync<UserLoginResponce>();
+                curToken = content.AccesToken;
+                curRefreshToken = content.RefreshToken;
+            }
         }
     }
 }
